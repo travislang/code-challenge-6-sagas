@@ -14,6 +14,19 @@ router.get('/', (req, res) => {
     })
     
 });
+//route to add new animal to db
+router.post('/', (req, res) => {
+    let sqlText = `INSERT INTO "species"("species_name", "class_id")
+    VALUES($1, $2);`;
+    pool.query(sqlText, [req.body.name, req.body.class])
+    .then( () => {
+        res.sendStatus(201);
+    }).catch( err => {
+        console.log('error in POST animal DB query:', err);
+        res.sendStatus(500);
+        
+    })
+});
 
 //route to get all of the classes
 router.get('/classes', (req, res) => {

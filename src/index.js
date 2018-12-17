@@ -22,11 +22,17 @@ function* fetchClasses() {
     yield put({type: 'SET_CLASSES', payload: animalClasses.data})
 }
 
+function* addAnimal(action) {
+    yield call(axios.post, '/zoo', action.payload)
+    yield put({type: 'GET_ZOO_ANIMALS'})
+}
+
 // Your saga should listen for the action type of `GET_ZOO_ANIMALS`
 function* rootSaga() {
     yield takeEvery('GET_ZOO_ANIMALS', fetchAnimals)
     yield takeEvery('GET_ANIMAL_CLASSES', fetchClasses)
-
+    yield takeEvery('ADD_ANIMAL', addAnimal)
+    
 }
 
 // Create sagaMiddleware

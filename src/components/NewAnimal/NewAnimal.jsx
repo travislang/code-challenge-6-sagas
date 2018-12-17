@@ -5,7 +5,7 @@ class NewAnimal extends Component {
 
     state = {
         name: '',
-        class: ''
+        class: 1
     }
     handleChange = (name) => (e) => {
         this.setState({
@@ -33,10 +33,10 @@ class NewAnimal extends Component {
                 />
                 <select required onChange={ this.handleChange('class')}>
                 {this.props.reduxStore.animalClasses.map(animal => {
-                        return (<option key={animal.id} value={animal.class_name}>{animal.class_name}</option>)
+                        return (<option key={animal.id} value={animal.id}>{animal.class_name}</option>)
                     })}
                 </select>
-                <button onClick={this.handleClick}>Add New Animal</button>
+                <button onClick={this.handleSubmit}>Add New Animal</button>
             </div>
         )
     }
