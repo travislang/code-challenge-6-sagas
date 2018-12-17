@@ -12,21 +12,31 @@ import createSagaMiddleware from 'redux-saga';
 import axios from 'axios';
 import { takeEvery, call, put } from 'redux-saga/effects';
 
+//saga to get animals
 function* fetchAnimals() {
     const zooAnimals = yield call(axios.get, '/zoo');
     yield put({type: 'SET_ZOO_ANIMALS', payload: zooAnimals.data})
 }
 
+//saga to get classes (needed for select input when adding new animal)
 function* fetchClasses() {
     const animalClasses = yield call(axios.get, 'zoo/classes');
     yield put({type: 'SET_CLASSES', payload: animalClasses.data})
 }
 
+//saga to post new animal to db async
 function* addAnimal(action) {
-    yield call(axios.post, '/zoo', action.payload)
-    yield put({type: 'GET_ZOO_ANIMALS'})
+    try {
+        yield call(axios.post, '/zoo', action.payload);
+        alert('Successfully added new animal!');
+        yield put({ type: 'GET_ZOO_ANIMALS' });
+    } catch (err) {
+        alert('Something went wrong. Please try again.');
+        console.log(err);
+    }
+    
 }
-
+//saga to delete animal from db
 function* deleteAnimal(action){
     yield call(axios.delete, `/zoo/${action.payload}`)
     yield put({ type: 'GET_ZOO_ANIMALS'})
