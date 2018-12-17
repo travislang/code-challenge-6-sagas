@@ -17,9 +17,15 @@ function* fetchAnimals() {
     yield put({type: 'SET_ZOO_ANIMALS', payload: zooAnimals.data})
 }
 
+function* fetchClasses() {
+    const animalClasses = yield call(axios.get, 'zoo/classes');
+    yield put({type: 'SET_CLASSES', payload: animalClasses.data})
+}
+
 // Your saga should listen for the action type of `GET_ZOO_ANIMALS`
 function* rootSaga() {
     yield takeEvery('GET_ZOO_ANIMALS', fetchAnimals)
+    yield takeEvery('GET_ANIMAL_CLASSES', fetchClasses)
 
 }
 
@@ -36,10 +42,20 @@ const zooAnimals = (state = [], action) => {
     }
 }
 
+const animalClasses = (state = [], action) => {
+    switch (action.type) {
+        case 'SET_CLASSES':
+            return action.payload;
+        default:
+            return state;
+    }
+}
+
 // Create one store that all components can use
 const storeInstance = createStore(
     combineReducers({
         zooAnimals,
+        animalClasses,
     }),
     // Add sagaMiddleware to our store
     applyMiddleware(sagaMiddleware, logger),

@@ -9,10 +9,21 @@ router.get('/', (req, res) => {
     `).then( result => {
         res.send(result.rows);
     }).catch( err => {
-        console.log('error in GET DB query:', err);
+        console.log('error in GET animals DB query:', err);
         res.sendStatus(500);
     })
     
 });
+
+//route to get all of the classes
+router.get('/classes', (req, res) => {
+    pool.query(`SELECT * FROM "class";`)
+    .then( result => {
+        res.send( result.rows )
+    }).catch( err => {
+        console.log('error in GET classes DB query:', err);
+        res.sendStatus(500);
+    })
+})
 
 module.exports = router;
