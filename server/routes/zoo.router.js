@@ -38,5 +38,16 @@ router.get('/classes', (req, res) => {
         res.sendStatus(500);
     })
 })
+//route to delete an animal from the db
+router.delete('/:id', (req, res) => {
+    pool.query(`DELETE FROM "species"
+    WHERE "id" = $1`, [req.params.id])
+    .then( () => {
+        res.send( 200 );
+    }).catch( err => {
+        console.log('error in delete DB query:', err);
+        res.sendStatus(500);
+    })
+})
 
 module.exports = router;

@@ -27,11 +27,17 @@ function* addAnimal(action) {
     yield put({type: 'GET_ZOO_ANIMALS'})
 }
 
+function* deleteAnimal(action){
+    yield call(axios.delete, `/zoo/${action.payload}`)
+    yield put({ type: 'GET_ZOO_ANIMALS'})
+}
+
 // Your saga should listen for the action type of `GET_ZOO_ANIMALS`
 function* rootSaga() {
     yield takeEvery('GET_ZOO_ANIMALS', fetchAnimals)
     yield takeEvery('GET_ANIMAL_CLASSES', fetchClasses)
     yield takeEvery('ADD_ANIMAL', addAnimal)
+    yield takeEvery('DELETE_ANIMAL', deleteAnimal)
     
 }
 
