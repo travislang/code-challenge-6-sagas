@@ -9,6 +9,7 @@ class AnimalList extends Component {
     componentDidMount() {
         const action = {type: 'GET_ZOO_ANIMALS'};
         this.props.dispatch(action);
+        this.props.dispatch({ type: 'GET_ANIMAL_CLASSES'})
     }
 
     // Renders the list of animals

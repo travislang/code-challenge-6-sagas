@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import AnimalList from '../AnimalList/AnimalList'
 import './App.css';
+import NewAnimal from '../NewAnimal/NewAnimal';
 
 class App extends Component {
   // Renders the entire app on the DOM
@@ -13,6 +14,7 @@ class App extends Component {
         </header>
         <br />
         <br />
+        <NewAnimal />
         <AnimalList />
       </div>
     );
