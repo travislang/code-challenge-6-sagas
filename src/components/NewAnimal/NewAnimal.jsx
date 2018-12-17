@@ -14,7 +14,7 @@ class NewAnimal extends Component {
     }
 
     handleSubmit = () => {
-        this.props.dispatch({type: 'ADD_ANIMAL', payload: this.state})
+        this.props.dispatch({ type: 'ADD_ANIMAL', payload: this.state })
         this.setState({
             name: '',
             class: ''
@@ -25,14 +25,14 @@ class NewAnimal extends Component {
     render() {
         return (
             <div>
+                <h3>Add New Animal:</h3>
                 <input
                     type="text"
                     placeholder='Name'
                     onChange={this.handleChange('name')}
                     value={this.state.name}
                 />
-                <select required onChange={ this.handleChange('class')}>
-                {this.props.reduxStore.animalClasses.map(animal => {
+                <select required onChange={this.handleChange('class')}>{this.props.reduxStore.animalClasses.map(animal => {
                         return (<option key={animal.id} value={animal.id}>{animal.class_name}</option>)
                     })}
                 </select>

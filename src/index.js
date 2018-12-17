@@ -34,7 +34,17 @@ function* addAnimal(action) {
         alert('Something went wrong. Please try again.');
         console.log(err);
     }
-    
+}
+//saga to post new class to db
+function* addClass(action) {
+    try {
+        yield call(axios.post, '/zoo/classes', action.payload)
+        alert('Successfully added new class!');
+        yield put({ type: 'GET_ANIMAL_CLASSES' });
+    } catch (err) {
+        alert('Something went wrong. Please try again.');
+        console.log(err);
+    }
 }
 //saga to delete animal from db
 function* deleteAnimal(action){
@@ -47,6 +57,7 @@ function* rootSaga() {
     yield takeEvery('GET_ZOO_ANIMALS', fetchAnimals)
     yield takeEvery('GET_ANIMAL_CLASSES', fetchClasses)
     yield takeEvery('ADD_ANIMAL', addAnimal)
+    yield takeEvery('ADD_CLASS', addClass)
     yield takeEvery('DELETE_ANIMAL', deleteAnimal)
     
 }

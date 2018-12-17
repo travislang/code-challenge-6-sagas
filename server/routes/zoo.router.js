@@ -38,6 +38,16 @@ router.get('/classes', (req, res) => {
         res.sendStatus(500);
     })
 })
+
+router.post('/classes', (req, res) => {
+    pool.query(`INSERT INTO "class"("class_name")
+    VALUES($1);`, [req.body.name] ).then( () => {
+        res.sendStatus(201)
+        }).catch(err => {
+            console.log('error in POST classes DB query:', err);
+            res.sendStatus(500);
+        })
+})
 //route to delete an animal from the db
 router.delete('/:id', (req, res) => {
     pool.query(`DELETE FROM "species"

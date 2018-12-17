@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import AnimalList from '../AnimalList/AnimalList'
 import './App.css';
 import NewAnimal from '../NewAnimal/NewAnimal';
+import NewClass from '../NewClass/NewClass';
 
 class App extends Component {
   // Renders the entire app on the DOM
@@ -13,8 +14,10 @@ class App extends Component {
           <h3>List of Species and Class</h3>
         </header>
         <br />
-        <br />
         <NewAnimal />
+        <NewClass />
+        <br />
+        <br />
         <AnimalList />
       </div>
     );
